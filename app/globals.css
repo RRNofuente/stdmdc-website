@@ -2,20 +2,169 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+.container {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.flip-card {
+  perspective: 1000px;
+  width: 400px; /* Increased width for more space */
+  height: 500px; /* Increased height to fit paragraphs */
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative; /* Needed for absolute positioning of front and back */
+}
+
+.flip-card-front,
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;  Remove to allow top alignment for content */
+  align-items: center; /* Center content horizontally */
+  padding: 20px; /* Added padding for spacing */
+  border-radius: 15px;
+}
+
+.flip-card-front {
+  background-color: #044a13;
+  color: rgb(115, 4, 4);
+  /* border-radius: 15px;  Already in common styles */
+  background-size: cover; /* Ensure image covers the entire card */
+  background-position: center; /* Center the background image */
+}
+
+.flip-card-back {
+  background-color: #ffffff;
+  color: #0aff3f;
+  transform: rotateY(180deg);
+  /* border-radius: 15px; Already in common styles */
+  overflow-y: auto; /* Make the back scrollable */
+  align-items: flex-start; /* Align items to the top left */
+  padding-top: 40px; /* Adjust top padding to accommodate the title */
+}
+
+.card-content {
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* Occupy full width for proper text wrapping */
+}
+
+.flip-card-back .card-content {
+  text-align: left; /* Align text to the left on the back */
+}
+
+.flip-card-front .card-content { /* Style the short description on front */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  color: white;
+  padding: 10px;
+  margin-top: auto; /* Push to the bottom */
+}
+
+.flip-card-back h3 {
+  margin-bottom: 10px; /* Add spacing below the title */
+  color: #044a13; /* Keep the title color consistent */
+  text-align: left; /* Align title to the left */
+  padding-left: 20px; /* Add left padding for consistency */
+}
+
+.flip-card-back ul {
+  list-style-type: disc;
+  padding-left: 40px; /* Indent the list items */
+  margin-bottom: 20px;
+  color: #044a13; /* Keep the list color consistent */
+}
+
+.flip-card-back li {
+  margin-bottom: 5px;
+}
+
+.flip-card-back p {
+  color: #044a13;
+  text-align: left; /* Align additional info to the left */
+  padding-left: 20px; /* Add left padding for consistency */
 }
