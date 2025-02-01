@@ -79,14 +79,15 @@ export default function HomePage() {
           </div>
           <div>
             <h2 className="text-3xl font-bold text-green-900 mb-6 font-serif">
-                Get to know us</h2>
+                Get to know us
+            </h2>
             <p className="text-lg text-gray-600 font-serif">
-            St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate, 
-            and client-focused healthcare services since 1992. We specialize in delivering comprehensive health screenings 
-            and evaluations for overseas employment applicants.
-            Our commitment to delivering accurate results promptly reflects our understanding of the value 
-            of time for both applicants and employers. Accredited by the government and certified under the 
-            ISO 9001 Quality Management System and SGS standards, we are well-equipped to meet your healthcare screening needs.
+              St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate, 
+              and client-focused healthcare services since 1992. We specialize in delivering comprehensive health screenings 
+              and evaluations for overseas employment applicants.
+              Our commitment to delivering accurate results promptly reflects our understanding of the value 
+              of time for both applicants and employers. Accredited by the government and certified under the 
+              ISO 9001 Quality Management System and SGS standards, we are well-equipped to meet your healthcare screening needs.
             </p>
           </div>
         </motion.div>
@@ -105,7 +106,6 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
             <ServiceCard
               title="Pre Medical"
-              
               description={[
                 "Complete Physical Examination with Medical History Taking",
                 "Chest X-ray",
@@ -123,7 +123,6 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Laboratory"
-              
               description={[
                 "Urinalysis",
                 "Fecalysis",
@@ -145,7 +144,6 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Imaging"
-              
               description={[
                 "Chest X-ray(Upper Extremities, Lower Extremities)",
                 "TRANSVAGINAL",
@@ -161,14 +159,12 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Other Services"
-              
               description={[
                 "Electrocardiography(ECG)",
                 "Treadmill Stress Test",
               ]}
               additionalInfo=''
             />
-            {/* Add more service cards */}
           </div>
         </motion.div>
       </section>

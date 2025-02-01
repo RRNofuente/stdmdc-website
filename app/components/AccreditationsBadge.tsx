@@ -10,9 +10,9 @@ interface AccreditationBadgeProps {
 
 export default function AccreditationBadge({ image, title }: AccreditationBadgeProps) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center text-center">
       <motion.div
-        className="relative w-32 h-32 mb-4"
+        className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4" // Mobile friendly size
         whileHover={{
           scale: 1.2,           // Scale up for 3D pop effect
           rotateX: 10,          // Add 3D rotation on X axis
@@ -29,10 +29,10 @@ export default function AccreditationBadge({ image, title }: AccreditationBadgeP
           transition: { duration: 0.1 }
         }}
       >
-        <Image src={image} alt={title} fill className="object-contain" />
+        <Image src={image} alt={title} layout="fill" className="object-contain" />
       </motion.div>
       <motion.p
-        className="text-gray-700 font-medium"
+        className="text-gray-700 font-medium text-sm sm:text-base" // Adjust font size for smaller screens
         whileHover={{
           color: "#FFD700",      // Gold color on hover
           scale: 1.1,            // Slightly scale up the text
