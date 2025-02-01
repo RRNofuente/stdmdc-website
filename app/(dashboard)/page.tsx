@@ -80,14 +80,15 @@ export default function HomePage() {
           </div>
           <div>
             <h2 className="text-3xl font-bold text-green-900 mb-6 font-serif">
-                Get to know us</h2>
+                Get to know us
+            </h2>
             <p className="text-lg text-gray-600 font-serif">
-            St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate, 
-            and client-focused healthcare services since 1992. We specialize in delivering comprehensive health screenings 
-            and evaluations for overseas employment applicants.
-            Our commitment to delivering accurate results promptly reflects our understanding of the value 
-            of time for both applicants and employers. Accredited by the government and certified under the 
-            ISO 9001 Quality Management System and SGS standards, we are well-equipped to meet your healthcare screening needs.
+              St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate, 
+              and client-focused healthcare services since 1992. We specialize in delivering comprehensive health screenings 
+              and evaluations for overseas employment applicants.
+              Our commitment to delivering accurate results promptly reflects our understanding of the value 
+              of time for both applicants and employers. Accredited by the government and certified under the 
+              ISO 9001 Quality Management System and SGS standards, we are well-equipped to meet your healthcare screening needs.
             </p>
           </div>
         </motion.div>
