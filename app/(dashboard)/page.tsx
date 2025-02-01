@@ -6,7 +6,6 @@ import Image from 'next/image';
 import ServiceCard from '@/app/components/ServiceCard';
 import AccreditationBadge from '@/app/components/AccreditationsBadge';
 import AboutImage from '@/public/container2.png';
-import ServicesImage from '@/public/hero.jpg';
 import ContactImage from '@/public/hero.jpg';
 
 export default function HomePage() {
