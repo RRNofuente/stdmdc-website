@@ -6,7 +6,6 @@ import Image from 'next/image';
 import ServiceCard from '@/app/components/ServiceCard';
 import AccreditationBadge from '@/app/components/AccreditationsBadge';
 import AboutImage from '@/public/container2.png';
-import ServicesImage from '@/public/hero.jpg';
 import ContactImage from '@/public/hero.jpg';
 
 export default function HomePage() {
@@ -38,10 +37,10 @@ export default function HomePage() {
             <div className="text-center md:text-left mb-8 md:mb-0">
               <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold mb-6 font-serif">
                 Dedicated to Delivering Quality Care 
-                for Workers' Pre-Employment Health
+                for Workers&apos; Pre-Employment Health
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-serif mb-6">
-                Absolute commitment to providing quality services for workers' pre-employment 
+                Absolute commitment to providing quality services for workers&apos; pre-employment 
                 health needs is not just a duty but a promise — a foundation where care meets purpose, 
                 ensuring health and well-being for every worker stepping toward their future.
               </p>
@@ -56,9 +55,11 @@ export default function HomePage() {
               Contact Us
             </a>
 
-            <img
+            <Image
               src="/container.png"
               alt="St. Thomas Diagnostic"
+              width={500}
+              height={500}
               className="w-full sm:w-1/2 md:w-1/3 h-auto object-cover object-center rounded-lg md:mr-8"
             />
           </motion.div>
@@ -75,7 +76,7 @@ export default function HomePage() {
           className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-12 items-center"
         >
           <div className="relative h-60 sm:h-80 md:h-96 w-full rounded-lg overflow-hidden">
-            <Image src={AboutImage} alt="About Us" fill className="object-cover" />
+            <Image src={AboutImage} alt="About Us" width={500} height={500} className="object-cover" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-green-900 mb-6 font-serif">
@@ -105,7 +106,6 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
             <ServiceCard
               title="Pre Medical"
-              
               description={[
                 "Complete Physical Examination with Medical History Taking",
                 "Chest X-ray",
@@ -123,7 +123,6 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Laboratory"
-              
               description={[
                 "Urinalysis",
                 "Fecalysis",
@@ -145,7 +144,6 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Imaging"
-              
               description={[
                 "Chest X-ray(Upper Extremities, Lower Extremities)",
                 "TRANSVAGINAL",
@@ -161,14 +159,12 @@ export default function HomePage() {
             />
             <ServiceCard
               title="Other Services"
-              
               description={[
                 "Electrocardiography(ECG)",
                 "Treadmill Stress Test",
               ]}
               additionalInfo=''
             />
-            {/* Add more service cards */}
           </div>
         </motion.div>
       </section>
@@ -211,7 +207,7 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-center text-green-900 mb-12">Contact Us</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
             <div className="relative h-60 sm:h-80 md:h-96 w-full rounded-lg overflow-hidden">
-              <Image src={ContactImage} alt="Contact" fill className="object-cover" />
+              <Image src={ContactImage} alt="Contact" width={500} height={500} className="object-cover" />
             </div>
             <div className="space-y-6">
               {isClient && <input type="text" placeholder="Name" className="w-full p-3 border rounded-lg" />}
