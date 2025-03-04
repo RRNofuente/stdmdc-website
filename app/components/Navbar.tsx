@@ -7,7 +7,7 @@ import Logo from "@/public/logo.png";
 import { usePathname } from "next/navigation";
 import { Bell, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";  // Add the SearchBar import here
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"; 
 
 interface LinkProps {
   name: string;
@@ -25,15 +25,14 @@ const links: LinkProps[] = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathName = usePathname(); // Use pathName to determine current route
+  const pathName = usePathname(); 
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 50);
+    setIsScrolled(window.scrollY > 50); // Change this value to adjust when the effect occurs
   };
 
-  // Adding scroll event listener
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -56,7 +55,6 @@ export default function Navbar() {
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col items-center justify-center lg:hidden"
         >
           <X onClick={toggleMobileMenu} className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer z-60" />
-          {/* Mobile Links */}
           <ul className="flex flex-col items-center gap-y-4 text-white text-base">
             {links.map((link, idx) => (
               <li key={idx} onClick={toggleMobileMenu}>
@@ -64,27 +62,41 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          
         </motion.div>
       )}
 
       {/* Main Navbar */}
       <motion.div
-        initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className={`navbar fixed top-0 left-0 right-0 z-50 w-full px-4 py-3 flex items-center justify-between transition-all duration-300 ${isScrolled ? "bg-green-900 bg-opacity-80" : "bg-green-900"}`}
-      >
+  initial={{ opacity: 0, y: -100 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.3 }}
+  className={`navbar fixed top-0 left-0 right-0 z-50 w-full px-4 py-3 flex items-center justify-between transition-all duration-300 
+    bg-green-900 shadow-[0px_4px_10px_rgba(0,0,0,0.6)]
+  `}
+>
+
         {/* Logo and Brand Name */}
         <div className="flex items-center space-x-4">
-          <Link href="/" className="w-24">
-            <Image src={Logo} alt="Logo" priority width={80} height={80} />
-          </Link>
-          <div className="font-serif text-xl font-bold text-white hidden md:block">
+          <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+            <Link href="/" className="w-24">
+              <motion.div 
+                whileHover={{ filter: "brightness(0) saturate(100%) invert(60%) sepia(95%) saturate(900%) hue-rotate(10deg)" }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image src={Logo} alt="Logo" priority width={80} height={80} />
+              </motion.div>
+            </Link>
+          </motion.div>
+
+          <motion.div 
+            className="font-serif text-xl font-bold text-white hidden md:block"
+            whileHover={{ color: "#FFD700", scale: 1.1 }} // Changes color to yellow on hover
+            transition={{ duration: 0.3 }}
+          >
             ST. THOMAS DIAGNOSTIC
             <br />
             MEDICAL AND DENTAL CLINIC, INC.
-          </div>
+          </motion.div>
         </div>
 
         {/* Desktop Navigation Links */}

@@ -7,6 +7,15 @@ import ServiceCard from '@/app/components/ServiceCard';
 import AccreditationBadge from '@/app/components/AccreditationsBadge';
 import AboutImage from '@/public/container2.png';
 import ContactImage from '@/public/hero.jpg';
+import Footer from '../components/Footer';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+
 
 export default function HomePage() {
   const [isClient, setIsClient] = useState(false);
@@ -20,6 +29,18 @@ export default function HomePage() {
     animate: { opacity: 1, y: 0 },
   };
 
+  const customIcon = L.icon({
+    iconUrl: markerIcon.src, // Use default Leaflet marker
+    shadowUrl: markerShadow.src,
+    iconSize: [30, 40], // Adjust size
+    iconAnchor: [15, 40], // Positioning
+    popupAnchor: [0, -35], // Popup position
+  });
+  
+
+
+  const clinicLocation: LatLngExpression = [14.5995, 120.9842];
+// Example coordinates, update as necessary
   return (
     <div className="min-h-screen pt-20">
       {/* Home Section */}
@@ -47,14 +68,13 @@ export default function HomePage() {
             </div>
 
             {/* Contact Us Button */}
-            <a
-              href="#contact"
-              className="absolute left-0 bottom-10 md:bottom-16 bg-green-900 text-white px-6 py-3 rounded-lg text-lg font-semibold 
-                        hover:bg-green-800 transition duration-300 ease-in-out"
-            >
-              Contact Us
-            </a>
-
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="absolute left-0 bottom-10 md:bottom-16 bg-green-900 text-white px-6 py-3 rounded-lg text-lg font-semibold 
+                      hover:bg-green-800 transition duration-300 ease-in-out"
+          >
+            Contact Us
+          </button>
             <Image
               src="/container.png"
               alt="St. Thomas Diagnostic"
@@ -207,9 +227,7 @@ export default function HomePage() {
         >
           <h2 className="text-3xl font-bold text-center text-green-900 mb-12">Contact Us</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-            <div className="relative h-60 sm:h-80 md:h-96 w-full rounded-lg overflow-hidden">
-              <Image src={ContactImage} alt="Contact" width={500} height={500} className="object-cover" />
-            </div>
+            {/* Contact Form Section */}
             <div className="space-y-6">
               {isClient && <input type="text" placeholder="Name" className="w-full p-3 border rounded-lg" />}
               {isClient && <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg" />}
@@ -220,9 +238,38 @@ export default function HomePage() {
                 </button>
               )}
             </div>
+
+            {/* Leaflet Map Section */}
+            <div className="relative h-80 sm:h-96 md:h-96 w-full rounded-lg overflow-hidden">
+            <MapContainer
+              center={clinicLocation as LatLngExpression}
+              zoom={15}
+              scrollWheelZoom={false}
+              className="w-full h-full"
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+
+              <Marker position={clinicLocation} icon={customIcon}>
+                <Popup>
+                  <div className="text-center">
+                    <h3 className="font-semibold text-lg text-green-900">
+                      St. Thomas Diagnostic Medical and Dental Clinic
+                    </h3>
+                    <p className="text-sm text-gray-700">
+                      📍 2nd Flr PWU Intl Hse Bldg., 1724 Leon Guinto Sr., Malate, Manila
+                    </p>
+                  </div>
+                </Popup>
+              </Marker>
+            </MapContainer>
+            </div>
           </div>
-        </motion.div>
+        </motion.div>   
       </section>
+      <Footer />
     </div>
   );
 }
