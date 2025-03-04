@@ -1,21 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ServiceCard from '@/app/components/ServiceCard';
 import AccreditationBadge from '@/app/components/AccreditationsBadge';
-import AboutImage from '@/public/container2.png';
-import ContactImage from '@/public/hero.jpg';
-import Footer from '../components/Footer';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LatLngExpression } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import Footer from '@/app/components/Footer';
 
-
+// Dynamically import the MapComponent to prevent SSR issues
+const DynamicMap = dynamic(() => import('@/app/components/MapComponent'), { ssr: false });
 
 export default function HomePage() {
   const [isClient, setIsClient] = useState(false);
@@ -29,18 +23,6 @@ export default function HomePage() {
     animate: { opacity: 1, y: 0 },
   };
 
-  const customIcon = L.icon({
-    iconUrl: markerIcon.src, // Use default Leaflet marker
-    shadowUrl: markerShadow.src,
-    iconSize: [30, 40], // Adjust size
-    iconAnchor: [15, 40], // Positioning
-    popupAnchor: [0, -35], // Popup position
-  });
-  
-
-
-  const clinicLocation: LatLngExpression = [14.5995, 120.9842];
-// Example coordinates, update as necessary
   return (
     <div className="min-h-screen pt-20">
       {/* Home Section */}
@@ -57,24 +39,20 @@ export default function HomePage() {
           >
             <div className="text-center md:text-left mb-8 md:mb-0">
               <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold mb-6 font-serif">
-                Dedicated to Delivering Quality Care 
-                for Workers&apos; Pre-Employment Health
+                Dedicated to Delivering Quality Care for Workers&apos; Pre-Employment Health
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-serif mb-6">
-                Absolute commitment to providing quality services for workers&apos; pre-employment 
-                health needs is not just a duty but a promise — a foundation where care meets purpose, 
-                ensuring health and well-being for every worker stepping toward their future.
+                Ensuring health and well-being for every worker stepping toward their future.
               </p>
             </div>
 
-            {/* Contact Us Button */}
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="absolute left-0 bottom-10 md:bottom-16 bg-green-900 text-white px-6 py-3 rounded-lg text-lg font-semibold 
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="absolute left-0 bottom-10 md:bottom-16 bg-green-900 text-white px-6 py-3 rounded-lg text-lg font-semibold 
                       hover:bg-green-800 transition duration-300 ease-in-out"
-          >
-            Contact Us
-          </button>
+            >
+              Contact Us
+            </button>
             <Image
               src="/container.png"
               alt="St. Thomas Diagnostic"
@@ -89,33 +67,26 @@ export default function HomePage() {
       {/* About Section */}
       <section id="about" className="min-h-screen flex items-center justify-center bg-gray-50 p-8 sm:p-10 md:p-12">
         <motion.div
-          initial={isClient ? 'initial' : false}
-          whileInView={isClient ? 'animate' : undefined}
+          initial="initial"
+          animate="animate"
           variants={sectionVariants}
-          viewport={{ once: true, margin: '-100px' }}
           className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-12 items-center"
         >
           <div className="relative h-60 sm:h-80 md:h-96 w-full rounded-lg overflow-hidden">
-            <Image src={AboutImage} alt="About Us" width={500} height={500} className="object-cover" />
+            <Image src="/container2.png" alt="About Us" width={500} height={500} className="object-cover" />
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-green-900 mb-6 font-serif">
-                Get to know us
-            </h2>
+            <h2 className="text-3xl font-bold text-green-900 mb-6 font-serif">Get to know us</h2>
             <p className="text-lg text-gray-600 font-serif">
-              St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate, 
-              and client-focused healthcare services since 1992. We specialize in delivering comprehensive health screenings 
-              and evaluations for overseas employment applicants.
-              Our commitment to delivering accurate results promptly reflects our understanding of the value 
-              of time for both applicants and employers. Accredited by the government and certified under the 
-              ISO 9001 Quality Management System and SGS standards, we are well-equipped to meet your healthcare screening needs.
+              St. Thomas Diagnostic Medical and Dental Clinic has been a trusted provider of reliable, compassionate,
+              and client-focused healthcare services since 1992.
             </p>
           </div>
         </motion.div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="min-h-screen flex items-center justify-center p-8 sm:p-10 md:p-12">
+       {/* Services Section */}
+        <section id="services" className="min-h-screen flex items-center justify-center p-8 sm:p-10 md:p-12">
         <motion.div
           initial={isClient ? 'initial' : false}
           whileInView={isClient ? 'animate' : undefined}
@@ -188,15 +159,14 @@ export default function HomePage() {
             />
           </div>
         </motion.div>
-      </section>
+        </section>
 
       {/* Accreditation Section */}
       <section id="accreditation" className="min-h-screen flex items-center justify-center bg-gray-50 p-8 sm:p-10 md:p-12">
         <motion.div
-          initial={isClient ? 'initial' : false}
-          whileInView={isClient ? 'animate' : undefined}
+          initial="initial"
+          animate="animate"
           variants={sectionVariants}
-          viewport={{ once: true, margin: '-100px' }}
           className="max-w-6xl mx-auto text-center"
         >
           <h2 className="text-3xl font-bold text-green-900 mb-8 font-serif">Accreditations</h2>
@@ -207,11 +177,6 @@ export default function HomePage() {
             <AccreditationBadge image="/prc_logo.png" title="" />
             <AccreditationBadge image="/iso_logo.png" title="" />
             <AccreditationBadge image="/ph_flag_logo.png" title="" />
-            <AccreditationBadge image="/sgs_logo.png" title="" />
-            <AccreditationBadge image="/marina_logo.png" title="" />
-            <AccreditationBadge image="/Ukas_logo.png" title="" />
-            <AccreditationBadge image="/globe_logo.png" title="" />
-            <AccreditationBadge image="/tigers_logo.png" title="" />
           </div>
         </motion.div>
       </section>
@@ -219,57 +184,34 @@ export default function HomePage() {
       {/* Contact Section */}
       <section id="contact" className="min-h-screen flex items-center justify-center p-8 sm:p-10 md:p-12">
         <motion.div
-          initial={isClient ? 'initial' : false}
-          whileInView={isClient ? 'animate' : undefined}
+          initial="initial"
+          animate="animate"
           variants={sectionVariants}
-          viewport={{ once: true, margin: '-100px' }}
           className="max-w-6xl mx-auto w-full"
         >
           <h2 className="text-3xl font-bold text-center text-green-900 mb-12">Contact Us</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-            {/* Contact Form Section */}
+            {/* Contact Form */}
             <div className="space-y-6">
               {isClient && <input type="text" placeholder="Name" className="w-full p-3 border rounded-lg" />}
               {isClient && <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg" />}
               {isClient && <textarea placeholder="Message" rows={5} className="w-full p-3 border rounded-lg" />}
-              {isClient && (
-                <button className="bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition">
-                  Send Message
-                </button>
-              )}
+              {isClient && <button className="bg-green-900 text-white px-6 py-3 rounded-lg">Send Message</button>}
             </div>
 
-            {/* Leaflet Map Section */}
+            {/* Map Component */}
             <div className="relative h-80 sm:h-96 md:h-96 w-full rounded-lg overflow-hidden">
-            <MapContainer
-              center={clinicLocation as LatLngExpression}
-              zoom={15}
-              scrollWheelZoom={false}
-              className="w-full h-full"
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              />
-
-              <Marker position={clinicLocation} icon={customIcon}>
-                <Popup>
-                  <div className="text-center">
-                    <h3 className="font-semibold text-lg text-green-900">
-                      St. Thomas Diagnostic Medical and Dental Clinic
-                    </h3>
-                    <p className="text-sm text-gray-700">
-                      📍 2nd Flr PWU Intl Hse Bldg., 1724 Leon Guinto Sr., Malate, Manila
-                    </p>
-                  </div>
-                </Popup>
-              </Marker>
-            </MapContainer>
+              <DynamicMap />
             </div>
           </div>
-        </motion.div>   
+        </motion.div>
       </section>
+
       <Footer />
     </div>
   );
 }
+
+
+
+

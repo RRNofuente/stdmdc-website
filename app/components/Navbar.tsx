@@ -29,15 +29,18 @@ export default function Navbar() {
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
-  const handleScroll = () => {
-    setIsScrolled(window.scrollY > 50); // Change this value to adjust when the effect occurs
-  };
-
   React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      const handleScroll = () => {
+        setIsScrolled(window.scrollY > 50);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
-
+  
+  
   return (
     <>
       {/* Mobile Menu Button */}
@@ -71,9 +74,10 @@ export default function Navbar() {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.3 }}
   className={`navbar fixed top-0 left-0 right-0 z-50 w-full px-4 py-3 flex items-center justify-between transition-all duration-300 
-    bg-green-900 shadow-[0px_4px_10px_rgba(0,0,0,0.6)]
-  `}
+    ${isScrolled ? "bg-green-800 shadow-lg" : "bg-green-900"}
+  `} 
 >
+
 
         {/* Logo and Brand Name */}
         <div className="flex items-center space-x-4">
